@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model gaji_karyawan {
+  id       Int      @id @default(autoincrement())
+  nip      String   @unique(map: "nip") @db.VarChar(15)
+  gapok    Decimal  @db.Decimal(10, 0)
+  karyawan karyawan @relation(fields: [nip], references: [nip], onUpdate: Restrict, map: "gaji_karyawan_ibfk_1")
+}
+
+model karyawan {
+  id            Int            @id @default(autoincrement())
+  nip           String         @unique(map: "nip") @db.VarChar(15)
+  nama          String         @db.VarChar(100)
+  no_telp       String         @db.VarChar(15)
+  gaji_karyawan gaji_karyawan?
+}
