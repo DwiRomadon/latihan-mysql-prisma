@@ -1,4 +1,4 @@
-npm init -y
+npm init -y <br>
 npm i express
 npm i prisma
 npm i @prisma/client
